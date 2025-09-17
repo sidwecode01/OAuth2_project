@@ -9,7 +9,11 @@ const name = ref("")
 const email = ref("")
 const password = ref("")
 const confirm_password = ref("")
-// const provider = ref('')
+const provider = ref('')
+
+onMounted(async ()=>{
+    provider.value = await store.allprovider
+})
 
 const register = async function (){
     await store.register(name.value, email.value, password.value, confirm_password.value)
@@ -22,8 +26,8 @@ const register = async function (){
 </script>
 
 <template>
-   <div v-for="value in store.allprovider" :key="value">
-        {{ value}}
+   <div >
+     
    </div>
   <body class="flex font-poppins items-center justify-center">
     <div class="h-screen w-screen flex justify-center items-center dark:bg-gray-900">

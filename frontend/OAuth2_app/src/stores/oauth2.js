@@ -92,12 +92,16 @@ export const useAuthentification = defineStore('postIt', {
       },
 
       async allprovider() {
-        const response = await fetch("http://127.0.0.1:8001/api/provider")
+        const response = await fetch("http://127.0.0.1:8001/api/provider", {
+           method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          }})
 
         const data = await response.json()
-        alert(await data)
         this.User = await data
-        return data
+        return this.User 
+        
       }
 
     //   async UpdatePost(id, title, content){

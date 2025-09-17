@@ -42,7 +42,7 @@ class AuthController extends Controller
         "status" => 1,
         "message" => "user registered",
         "data"=> $response
-       ]);
+       ]);console.log(provider.value);
     }
 
     public function login (Request $request){

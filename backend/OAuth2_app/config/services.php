@@ -37,7 +37,8 @@ return [
     'github' => [
     'client_id' => env('GITHUB_CLIENT_ID'),
     'client_secret' => env('GITHUB_CLIENT_SECRET'),
-    'redirect' => 'GITHUB_CLIENT_REDIRECT_URL',
-    ],
+    'redirect' => env('GITHUB_REDIRECT_URL'),
+],
+
 
 ];

@@ -4,45 +4,59 @@ namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Enums\Provider;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 
 class SocialiteAuthController extends Controller
 {
-    //
-    public function redirect (Provider $provider){
-        
-        return Socialite::driver($provider->value)->redirect();
-            
-             
+    // Liste des providers autorisés
+    protected $allowedProviders = ['github', 'google', 'twitter'];
+
+    // Redirection vers le provider OAuth
+    public function redirect(string $provider)
+    {
+        if (!in_array($provider, $this->allowedProviders)) {
+            return response()->json(['error' => 'Provider invalide'], 400);
+        }
+
+        return Socialite::driver($provider)->redirect();
     }
 
-    public function provider(){
-        $provider = Provider::values();
-        return response()->json([
-            "provider" => $provider,
-        ]);
-    }
+    // Callback après authentification OAuth
+    public function callback(string $provider)
+    {
+        if (!in_array($provider, $this->allowedProviders)) {
+            return response()->json(['error' => 'Provider invalide'], 400);
+        }
 
-    public function authenticate(){
-        try{
-            $socialiteUser = Socialite::drive('github')->user();
-            $user = User::firstOrCreate(
-               [ "email" => strtolower($socialiteUser)],
-               ["name" => $socialiteUser->getName(), "password" => Hash::make(time())]
+        try {
+            // Utiliser stateless() pour API sans session
+            $socialiteUser = Socialite::driver($provider)->stateless()->user();
+
+
+            // Créer ou récupérer l'utilisateur
+            $user = User::updateOrCreate(
+                ['email' => strtolower($socialiteUser->getEmail())],
+                [
+                    'name' => $socialiteUser->getName() ?? $socialiteUser->getNickname(),
+                    'password' => Hash::make(time()),
+                   'provider' => $provider
+                ]
             );
 
+            // Authentifier l'utilisateur
             Auth::login($user);
-            // return response()->json([
-            //     "user" => $socialiteUser->getName(),
-            // ]);
 
-        }catch(Exception $exception){
-            return to_route('login')->with('erreur');
+            return response()->json(['user' => $user]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Échec du callback OAuth',
+                'message' => $e->getMessage()
+            ], 500);
         }
     }
 
-  
-    
+
 }

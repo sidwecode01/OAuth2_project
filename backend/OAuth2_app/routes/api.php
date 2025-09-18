@@ -12,11 +12,11 @@ use App\Http\Controllers\API\SocialiteAuthController;
 
 Route::post("register", [AuthController::class, "register"]);
 Route::post("login", [AuthController::class, "login"]);
-Route::get('provider' , [SocialiteAuthController::class, 'provider']);
+// Route::get('provider' , [SocialiteAuthController::class, 'provider']);
 
 Route::middleware('web')->group(function () {
     Route::controller(SocialiteAuthController::class)->group(function(){
         Route::get('oauth/{provider}/redirect', 'redirect');
-        Route::get('oauth/{provider}/callback', 'authenticate');
+        Route::get('oauth/{provider}/callback', 'callback');
 });
 });

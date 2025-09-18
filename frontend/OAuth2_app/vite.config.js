@@ -14,5 +14,12 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
+    
   },
+  server: {
+        allowedHosts: [
+          'localhost', // Keep localhost if you still use it directly
+          'f0eafef192e7.ngrok-free.app' // Add your ngrok host here
+        ]
+      }
 })

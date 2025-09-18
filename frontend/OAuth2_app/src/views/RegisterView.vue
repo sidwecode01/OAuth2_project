@@ -127,6 +127,7 @@ const register = async function (){
             id="third-party-auth"
             class="flex items-center justify-center mt-5 flex-wrap"
           >
+          <a href="http://127.0.0.1:8000/api/oauth/google/redirect">
             <button
               href="#"
               class="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
@@ -137,6 +138,7 @@ const register = async function (){
                 alt="Google"
               />
             </button>
+            </a>
             <button
               href="#"
               class="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
@@ -147,9 +149,9 @@ const register = async function (){
                 alt="Linkedin"
               />
             </button>
-            <a href="http://127.0.0.1:8001/api/oauth/github/callback">
+            <a href="http://127.0.0.1:8000/api/oauth/github/redirect">
             <button
-              href="http://127.0.0.1:8001/api/oauth/github/redirect"
+              href="http://127.0.0.1:8000/api/oauth/github/redirect"
               class="hover:scale-105 ease-in-out duration-300 shadow-lg p-2 rounded-lg m-1"
             >
             

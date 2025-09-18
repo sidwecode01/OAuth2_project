@@ -49,7 +49,8 @@ class SocialiteAuthController extends Controller
             // Authentifier l'utilisateur
             Auth::login($user);
 
-            return response()->json(['user' => $user]);
+            // return response()->json(['user' => $user]);
+            
         } catch (\Exception $e) {
             return response()->json([
                 'error' => 'Échec du callback OAuth',

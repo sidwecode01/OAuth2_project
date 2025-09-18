@@ -13,6 +13,7 @@ use App\Http\Controllers\API\SocialiteAuthController;
 Route::post("register", [AuthController::class, "register"]);
 Route::post("login", [AuthController::class, "login"]);
 // Route::get('provider' , [SocialiteAuthController::class, 'provider']);
+Route::get('allUser', [AuthController::class, "alluser"]);
 
 Route::middleware('web')->group(function () {
     Route::controller(SocialiteAuthController::class)->group(function(){

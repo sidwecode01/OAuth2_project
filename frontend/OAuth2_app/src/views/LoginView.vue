@@ -81,16 +81,19 @@ const login = async function() {
           <div class="flex flex-col mt-4 items-center justify-center text-sm">
             <h3 class="dark:text-gray-300">
               Don't have an account?
-              <a
+               <RouterLink to="/register">
+              <button
                 class="group text-blue-400 transition-all duration-100 ease-in-out"
                 href="#"
               >
+            
                 <span
                   class="bg-left-bottom bg-gradient-to-r from-blue-400 to-blue-400 bg-[length:0%_2px] bg-no-repeat group-hover:bg-[length:100%_2px] transition-all duration-500 ease-out"
                 >
                   Sign Up
                 </span>
-              </a>
+              </button>
+              </RouterLink>
             </h3>
           </div>
           <!-- Third Party Authentication Options -->

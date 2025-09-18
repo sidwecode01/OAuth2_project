@@ -11,6 +11,14 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     //
+
+    public function alluser(){
+        $users = User::all();
+        return response()->json([
+            "user" => $users,
+        ]);
+    }
+
     public function register(Request $request){
        $validator = Validator::make($request->all(), [
         "name" => "required",

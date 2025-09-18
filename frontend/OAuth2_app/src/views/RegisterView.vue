@@ -110,7 +110,8 @@ const register = async function (){
           <div class="flex flex-col mt-4 items-center justify-center text-sm">
             <h3 class="dark:text-gray-300">
                Have an account?
-              <a
+                <RouterLink to="/login">
+              <button
                 class="group text-blue-400 transition-all duration-100 ease-in-out"
                 href="#"
               >
@@ -119,7 +120,8 @@ const register = async function (){
                 >
                   Log in
                 </span>
-              </a>
+              </button>
+              </RouterLink>
             </h3>
           </div>
           <!-- Third Party Authentication Options -->
